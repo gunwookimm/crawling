@@ -13,12 +13,12 @@ data = requests.get('https://www.genie.co.kr/chart/top200?ditc=D&rtm=N', headers
 # 이제 코딩을 통해 필요한 부분을 추출하면 된다.
 soup = BeautifulSoup(data.text, 'html.parser')
 
-rawdata = soup.select('.newest-list > .music-list-wrap > .list-wrap tr')
+song_rawdata = soup.select('.newest-list > .music-list-wrap > .list-wrap tr')
 date = soup.select('.chart-date input#curDateComma')[0]['value']
+print(date, "지니차트 순위")
 
 rank = 1
-print(date, "지니차트 순위")
-for titleitem in rawdata:
+for titleitem in song_rawdata:
     song_title = titleitem.select_one('a.title.ellipsis')
     song_artist = titleitem.select_one('a.artist.ellipsis')
     if song_title is not None:
